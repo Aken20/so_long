@@ -19,10 +19,11 @@ GNL = get_next_line/GNL.a
 PRINTF = printf/printf.a
 LIBFT = libft/libft.a
 
-
+%.o: %.c
+	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 all: $(PRINTF) $(GNL)
-	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(PRINTF) $(GNL) -o $(FILES)
+	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(PRINTF) $(GNL)  mlx/libmlx.a -framework OpenGL -framework AppKit  -o $(FILES)
 
 $(MAKE): make re
 
