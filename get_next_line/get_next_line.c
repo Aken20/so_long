@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:00:19 by ahibrahi          #+#    #+#             */
-/*   Updated: 2023/11/26 01:19:32 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2023/12/31 15:45:16 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static	char	*set_tmp(char *str)
 		i++;
 	if (!str[i])
 		return (free(str), NULL);
-	tmp = ft_strdup(str + i, 0);
+	tmp = ft_g_strdup(str + i, 0);
 	free(str);
 	if (!tmp)
 		return (NULL);
@@ -66,14 +66,14 @@ char	*print_line(char *str, char *buf, int fd, int i)
 	char		*line;
 
 	if (tmp)
-		str = ft_strdup(tmp, 1);
+		str = ft_g_strdup(tmp, 1);
 	while (i > 0)
 	{
 		i = read(fd, buf, BUFFER_SIZE);
 		if (i < 0)
 			return (free(buf), NULL);
 		buf[i] = '\0';
-		str = ft_strjoin(str, buf);
+		str = ft_g_strjoin(str, buf);
 		if (!str || !*str)
 			return (free(buf), free(str), NULL);
 		if (ft_strchr(str, '\n'))

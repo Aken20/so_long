@@ -6,28 +6,27 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:00:19 by ahibrahi          #+#    #+#             */
-/*   Updated: 2023/11/25 21:32:56 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2023/12/31 15:50:05 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_bzero(char *s, int n)
+void	*ft_bzero(void *s, int n)
 {
-	int		i;
+	char	*c_s;
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	while (i <= n)
+	c_s = (char *) s;
+	while (n > 0)
 	{
-		s[i] = '\0';
-		i++;
+		*c_s = 0;
+		--n;
+		++c_s;
 	}
-	return (s);
+	return (c_s);
 }
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
@@ -37,7 +36,8 @@ size_t	ft_strlen(char *s)
 	return (len);
 }
 
-char	*ft_strdup(char *s, int k)
+
+char	*ft_g_strdup(char *s, int k)
 {
 	size_t	i;
 	size_t	n;
@@ -63,7 +63,7 @@ char	*ft_strdup(char *s, int k)
 	return (dup);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_g_strjoin(char *s1, char *s2)
 {
 	size_t	l;
 	size_t	l1;
@@ -72,9 +72,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s2)
-		return (ft_strdup(s1, 1));
+		return (ft_g_strdup(s1, 1));
 	if (!s1)
-		return (ft_strdup(s2, 0));
+		return (ft_g_strdup(s2, 0));
 	l = ft_strlen(s1);
 	l1 = ft_strlen(s2);
 	sjn = (char *) malloc((l + l1) + 1);

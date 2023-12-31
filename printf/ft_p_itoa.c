@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_p_itoa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 14:27:48 by ahibrahi          #+#    #+#             */
-/*   Updated: 2023/09/12 16:05:59 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2023/12/31 15:37:22 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static	char	*ft_set(char *s, long long n, int len)
 	return (s);
 }
 
-int	ft_itoa(long long n)
+int	ft_p_itoa(long long n)
 {
 	char	*s;
 	int		len;

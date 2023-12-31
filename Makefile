@@ -20,8 +20,18 @@ PRINTF = printf/printf.a
 LIBFT = libft/libft.a
 
 
+
 all: $(PRINTF) $(GNL)
-	$(CC) $(CFLAGS) $(SRCS) $(PRINTF) $(GNL) -o $(FILES)
+	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(PRINTF) $(GNL) -o $(FILES)
+
+$(MAKE): make re
+
+$(GNL):
+	$(MAKE) -C get_next_line
+$(PRINTF):
+	$(MAKE) -C printf
+$(LIBFT):
+	$(MAKE) -C libft
 
 clean:
 	$(RM) $(FILES)
