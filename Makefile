@@ -1,6 +1,6 @@
 NAME = SO_SO_LONG
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 AR = ar -rcs
 RM = rm -f
 
