@@ -6,11 +6,34 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:00:19 by ahibrahi          #+#    #+#             */
-/*   Updated: 2023/12/31 15:45:16 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/03 08:09:03 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static	char	*ft_trim(char *str)
+{
+    int     i;
+    int     start;
+    int     end;
+    char    *s;
+    
+    i = 0;
+    start = 0;
+    while (str[start] && str[start] != '1')
+        start++;
+    end = start;
+    while (str[end] && (str[end] == '1' || str[end] == '0' || str[end] == 'C' || str[end] == 'P' || str[end] == 'E'))
+        end++;
+    // printf("%d\n%d\n", start, end);
+    s = malloc(sizeof(char) * (end - start + 1));
+    while (str[start] && start <= end)
+        s[i++] = str[start++];
+    s[i] = '\0';
+    free(str);
+    return (s);
+}
 
 static	char	*first_line(char *str)
 {
@@ -33,8 +56,8 @@ static	char	*first_line(char *str)
 		new_str[c] = str[c];
 		c++;
 	}
-	if (str[c] == '\n')
-		new_str[c++] = '\n';
+	// if (str[c] == '\n')
+		// c++;
 	new_str[c] = 0;
 	return (new_str);
 }
@@ -81,6 +104,7 @@ char	*print_line(char *str, char *buf, int fd, int i)
 		ft_bzero(buf, i);
 	}
 	line = first_line(str);
+	line = ft_trim(line);
 	tmp = set_tmp(str);
 	return (free(buf), line);
 	if (i < 0)

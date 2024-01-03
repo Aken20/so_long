@@ -1,10 +1,10 @@
-NAME = SO_SO_LONG
+NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror# -g3 -fsanitize=address
 AR = ar -rcs
 RM = rm -f
 
-FILES = so_long
+FILES = map so_long readmap
 PFILES = ft_putchar ft_putstr ft_putnbr ft_printf ft_u ft_itoa ft_p ft_hex ft_hexb \
 
 SRCS = $(addsuffix .c, $(FILES))
@@ -23,16 +23,16 @@ LIBFT = libft/libft.a
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 all: $(PRINTF) $(GNL)
-	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(PRINTF) $(GNL)  mlx/libmlx.a -framework OpenGL -framework AppKit  -o $(FILES)
+	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(PRINTF) $(GNL)  mlx/libmlx.a -framework OpenGL -framework AppKit -o $(NAME)
 
 $(MAKE): make re
 
 $(GNL):
-	$(MAKE) -C get_next_line
+	cd get_next_line && make re && cd ..
 $(PRINTF):
-	$(MAKE) -C printf
+	cd printf && make re && cd ..
 $(LIBFT):
-	$(MAKE) -C libft
+	cd libft && make re && cd ..
 
 clean:
 	$(RM) $(FILES)
