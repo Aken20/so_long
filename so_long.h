@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:16:33 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/04 01:28:05 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/04 08:37:14 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	ft_down(t_data *img);
 void	ft_left(t_data *img);
 void	ft_right(t_data *img);
 int		ft_quit_game(t_data *img);
+int ft_check_sides(char **map);
 

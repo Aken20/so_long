@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 04:27:23 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/04 04:34:06 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/04 08:36:56 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,36 @@ int	ft_lines_len(int fd)
 		free(s);
 	}
 	return (len);
+}
+
+int ft_check_sides(char **map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	x = 0;
+	while (map[y])
+	{
+		while (map[y][x])
+		{
+			if (map[y][x] == '1')
+			{
+				while (map[y][x])
+					x++;
+				if (map[y][x-1] == '1')
+					x++;
+				else 
+					return (ft_putstr("THE MAP ARE NOT SURROUNDED BY WALLS"));
+			}
+			else 
+				return (ft_putstr("THE MAP ARE NOT SURROUNDED BY WALLS"));
+		}
+		x = 0;
+		y++;
+	}
+		// return (ft_putstr("LESS THAN ONE COLLECTABLE"));
+	return (0);
 }
 
 int	ft_lastline(char *map, int len)

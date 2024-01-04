@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:03:58 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/03 23:31:10 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/04 08:39:30 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,7 @@ int	ft_check_map(char **map)
 		exit (0);
 	else if (ft_rectangular_check(map, line_length))
 		exit (0);
+	// else if (ft_check_sides(map))
+		// exit (0);
 	return (0);
 }
