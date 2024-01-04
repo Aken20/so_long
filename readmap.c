@@ -6,15 +6,16 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 04:27:23 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/03 10:15:59 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/04 04:34:06 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_lines_len(char *s, int fd)
+int	ft_lines_len(int fd)
 {
-	int	len;
+	char	*s;
+	int		len;
 
 	len = 0;
 	s = get_next_line(fd);
@@ -27,6 +28,23 @@ int	ft_lines_len(char *s, int fd)
 		free(s);
 	}
 	return (len);
+}
+
+int	ft_lastline(char *map, int len)
+{
+	int	x;
+
+	x = 0;
+	if (map[x])
+	{
+		while (map[x] && map[x] != '1')
+			x++;
+		while (map[x] && map[x++] == '1')
+			len--;
+	}
+	if (len)
+		exit(ft_putstr("the first line and the last line is not all walls"));
+	return (0);
 }
 
 int	ft_firstline(char **map)
@@ -59,7 +77,7 @@ char	**ft_read_map(char **map, char *file)
 
 	i = 0;
 	fd = open(file, O_RDONLY);
-	i = ft_lines_len(s, fd);
+	i = ft_lines_len(fd);
 	map = malloc (sizeof(char *) * (i + 1));
 	i = 0;
 	close(fd);

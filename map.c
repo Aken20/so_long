@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:03:58 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/03 10:19:32 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/03 23:31:10 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ static	int	ft_rectangular_check(char **map, int len)
 		{
 			while (map[y][x] && (map[y][x] == '1' ||
 			map[y][x] == '0' || map[y][x] == 'C' ||
-			map[y][x] == 'P' || map[y][x++] == 'E'))
+			map[y][x] == 'P' || map[y][x] == 'E'))
+			{
 				x++;
+				tmp--;
+			}
 			if (tmp > 0 || tmp < 0)
 				exit(ft_putstr("its not rectangular"));
 		}
@@ -122,11 +125,16 @@ static	int	ft_player(char **map)
 int	ft_check_map(char **map)
 {
 	int	line_length;
+	int	len;
 
-	line_length = ft_firstline(map);
+	len = 0;
 	if (!map)
 		exit(ft_putstr("THER'S NO MAP"));
-	else if (ft_exits(map))
+	line_length = ft_firstline(map);
+	while (map[len])
+		len++;
+	ft_lastline(map[len - 1], line_length);
+	if (ft_exits(map))
 		exit (0);
 	else if (ft_collectable(map))
 		exit (0);

@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror# -g3 -fsanitize=address
 AR = ar -rcs
 RM = rm -f
 
-FILES = map so_long readmap
+FILES = map so_long readmap movment
 PFILES = ft_putchar ft_putstr ft_putnbr ft_printf ft_u ft_itoa ft_p ft_hex ft_hexb \
 
 SRCS = $(addsuffix .c, $(FILES))
