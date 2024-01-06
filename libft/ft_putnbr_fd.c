@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:01:42 by ahibrahi          #+#    #+#             */
-/*   Updated: 2023/09/10 03:45:30 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:01:33 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static	void	ft_set(int n, int fd, int len)
 	{
 		l = n / k;
 		if (n > 10)
-			c = (l % k) + 48; 
+			c = (l % k) + 48;
 		else
 			c = l + 48;
 		write(fd, &c, 1);

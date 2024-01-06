@@ -6,11 +6,47 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 04:18:21 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/04 20:02:36 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:01:07 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_set_render(t_data *img, int x, int y)
+{
+	if (img->map_s->map[y][x] == '1')
+		mlx_put_image_to_window(img->mlx, img->win, img->img_s->wall,
+			(x * img->size), (y * img->size));
+	else if (img->map_s->map[y][x] == 'C')
+		mlx_put_image_to_window(img->mlx, img->win,
+			img->img_s->collectable, (x * img->size),
+			(y * img->size));
+	else if (img->map_s->map[y][x] == 'P')
+	{
+		img->map_s->p_x = x;
+		img->map_s->p_y = y;
+		if (img->map_s->p_s == 2)
+			mlx_put_image_to_window(img->mlx, img->win, img->img_s->player_l,
+				(x * img->size), (y * img->size));
+		else if (img->map_s->p_s == 1)
+			mlx_put_image_to_window(img->mlx, img->win, img->img_s->player_r,
+				(x * img->size), (y * img->size));
+		else
+			mlx_put_image_to_window(img->mlx, img->win, img->img_s->player,
+				(x * img->size), (y * img->size));
+	}
+	else if (img->map_s->map[y][x] == 'E')
+	{
+		if (ft_collectable_count(img->map_s->map))
+			mlx_put_image_to_window(img->mlx, img->win,
+				img->img_s->closed_door, (x * img->size),
+				(y * img->size));
+		else
+			mlx_put_image_to_window(img->mlx, img->win,
+				img->img_s->exit, (x * img->size),
+				(y * img->size));
+	}
+}
 
 int	ft_render(t_data *img)
 {
@@ -19,31 +55,7 @@ int	ft_render(t_data *img)
 	{
 		while (img->x < img->map_s->x)
 		{
-			if (img->map_s->map[img->y][img->x] == '1')
-				mlx_put_image_to_window(img->mlx, img->win, img->img_s->wall,
-					(img->x * img->size), (img->y * img->size));
-			else if (img->map_s->map[img->y][img->x] == 'C')
-				mlx_put_image_to_window(img->mlx, img->win,
-					img->img_s->collectable, (img->x * img->size),
-					(img->y * img->size));
-			else if (img->map_s->map[img->y][img->x] == 'P')
-			{
-				img->map_s->p_x = img->x;
-				img->map_s->p_y = img->y;
-				mlx_put_image_to_window(img->mlx, img->win, img->img_s->player,
-					(img->x * img->size), (img->y * img->size));
-			}
-			else if (img->map_s->map[img->y][img->x] == 'E')
-			{
-				if (ft_collectable_count(img->map_s->map))
-					mlx_put_image_to_window(img->mlx, img->win,
-						img->img_s->closed_door, (img->x * img->size),
-						(img->y * img->size));
-				else
-					mlx_put_image_to_window(img->mlx, img->win,
-						img->img_s->exit, (img->x * img->size),
-						(img->y * img->size));
-			}
+			ft_set_render(img, img->x, img->y);
 			img->x++;
 		}
 		img->x = 0;
@@ -56,17 +68,21 @@ int	ft_render(t_data *img)
 void	ft_set_imgs(t_data *img)
 {
 	img->win = mlx_new_window(img->mlx, img->map_s->x * 60,
-			img->map_s->y * 60, "Hello world!");
-	img->img_s->wall = mlx_xpm_file_to_image(img->mlx, "wall.xpm",
+			img->map_s->y * 60, "Game");
+	img->img_s->wall = mlx_xpm_file_to_image(img->mlx, "texture/wall.xpm",
 			&img->size, &img->size);
-	img->img_s->exit = mlx_xpm_file_to_image(img->mlx, "open_door.xpm",
+	img->img_s->exit = mlx_xpm_file_to_image(img->mlx, "texture/open_door.xpm",
 			&img->size, &img->size);
-	img->img_s->closed_door = mlx_xpm_file_to_image(img->mlx, "closed_door.xpm",
-			&img->size, &img->size);
+	img->img_s->closed_door = mlx_xpm_file_to_image(img->mlx,
+			"texture/closed_door.xpm", &img->size, &img->size);
 	img->img_s->collectable = mlx_xpm_file_to_image(img->mlx,
-			"collectable2.xpm", &img->size, &img->size);
-	img->img_s->player = mlx_xpm_file_to_image(img->mlx, "player1.xpm",
+			"texture/collectable2.xpm", &img->size, &img->size);
+	img->img_s->player = mlx_xpm_file_to_image(img->mlx, "texture/player.xpm",
 			&img->size, &img->size);
+	img->img_s->player_r = mlx_xpm_file_to_image(img->mlx,
+			"texture/player_r.xpm", &img->size, &img->size);
+	img->img_s->player_l = mlx_xpm_file_to_image(img->mlx,
+			"texture/player_l.xpm", &img->size, &img->size);
 	img->x = 0;
 	img->y = 0;
 }
@@ -117,11 +133,9 @@ int	main (int ac, char **av)
 		while (img->map_s->map[i])
 			i++;
 		img->map_s->y = i;
-		// map_check(img->map_s->map);
-		ft_check_map(img->map_s->map);
+		ft_check_map(img);
 		img->mlx = mlx_init();
 		ft_set_imgs(img);
-		// ft_render(img);
 		mlx_loop_hook(img->mlx, ft_render, img);
 		mlx_hook(img->win, 2, 0, ft_hocks, img);
 		mlx_loop(img->mlx);

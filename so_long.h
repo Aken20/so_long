@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:16:33 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/04 08:37:14 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 22:56:19 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@
 
 typedef struct s_imgs
 {
+	int		moves;
 	void	*wall;
 	void	*player;
+	void	*player_l;
+	void	*player_r;
 	void	*collectable;
 	void	*exit;
 	void	*closed_door;
@@ -36,6 +39,7 @@ typedef struct s_map
 	char	**map;
 	int		p_x;
 	int		p_y;
+	int		p_s;
 	int		x;
 	int		y;
 }				t_map;
@@ -52,7 +56,7 @@ typedef struct s_data
 }				t_data;
 
 int		ft_collectable_count(char **map);
-int		ft_check_map(char **map);
+int		ft_check_map(t_data *img);
 char	**ft_read_map(char **map, char *file);
 int		ft_firstline(char **map);
 int		ft_lastline(char *map, int len);
@@ -61,5 +65,4 @@ void	ft_down(t_data *img);
 void	ft_left(t_data *img);
 void	ft_right(t_data *img);
 int		ft_quit_game(t_data *img);
-int ft_check_sides(char **map);
-
+int		ft_check_sides(char **map, int len);

@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:58:27 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/03 07:49:48 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:58:15 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # endif
 
 char	*get_next_line(int fd);
-// char	**ft_read_map(char **map, int fd, int len);
 char	*ft_g_strdup(char *s, int k);
 char	*ft_g_strjoin(char *s1, char *s2);
 

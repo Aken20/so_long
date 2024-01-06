@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 07:13:36 by ahibrahi          #+#    #+#             */
-/*   Updated: 2023/12/31 15:36:30 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:00:44 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdio.h>
-#include <limits.h>
+# include <limits.h>
 
 int		ft_printf(const char *type, ...);
 int		ft_putchar(char c);

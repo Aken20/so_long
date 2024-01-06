@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 04:27:23 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/04 08:36:56 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 22:51:32 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,36 @@ int	ft_lines_len(int fd)
 			break ;
 		s = get_next_line(fd);
 		len++;
-		free(s);
+		// free(s);
 	}
 	return (len);
 }
 
-int ft_check_sides(char **map)
+int	ft_check_sides(char **map, int len)
 {
 	int	y;
 	int	x;
 
 	y = 0;
 	x = 0;
-	while (map[y])
+	while (map[y] && y < len)
 	{
 		while (map[y][x])
 		{
-			if (map[y][x] == '1')
+			if (map[y][x] == '1' || map[y][x] == '\n')
 			{
 				while (map[y][x])
 					x++;
-				if (map[y][x-1] == '1')
-					x++;
-				else 
-					return (ft_putstr("THE MAP ARE NOT SURROUNDED BY WALLS"));
+				if (x > 1)
+					if (map[y][x - 1] != '1' && map[y][x - 1] != '\n')
+						return (ft_putstr("THE MAP ARE NOT SURROUNDED BY WALLS"));
 			}
-			else 
-				return (ft_putstr("THE MAP ARE NOT SURROUNDED BY WALLS"));
+			// else
+			// 	x++;
 		}
 		x = 0;
 		y++;
 	}
-		// return (ft_putstr("LESS THAN ONE COLLECTABLE"));
 	return (0);
 }
 
@@ -67,13 +65,17 @@ int	ft_lastline(char *map, int len)
 	x = 0;
 	if (map[x])
 	{
-		while (map[x] && map[x] != '1')
-			x++;
-		while (map[x] && map[x++] == '1')
+		// while (map[x] && map[x] != '1')
+		// 	x++;
+		while (map[x])
+		{
 			len--;
+			x++;
+		}
+		ft_printf("%d\n", len);
+		if (len != 0)
+			exit(ft_putstr("the first line and the last line is not all walls"));
 	}
-	if (len)
-		exit(ft_putstr("the first line and the last line is not all walls"));
 	return (0);
 }
 
@@ -92,8 +94,11 @@ int	ft_firstline(char **map)
 	{
 		while (map[y][x] && map[y][x] != '1')
 			x++;
-		while (map[y][x] && map[y][x++] == '1')
+		while (map[y][x] && map[y][x] == '1')
+		{
 			len++;
+			x++;
+		}
 		y++;
 	}
 	return (len);
@@ -120,7 +125,7 @@ char	**ft_read_map(char **map, char *file)
 		map[i] = ft_g_strdup(s, 0);
 		s = get_next_line(fd);
 		i++;
-		free(s);
+		// free(s);
 	}
 	map[i] = NULL;
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:42:44 by ahibrahi          #+#    #+#             */
-/*   Updated: 2023/12/31 15:52:00 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:59:29 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static	int	ft_xcount(unsigned int x)
 
 int	ft_hex(unsigned int x)
 {
-	int	 	c;
+	int		c;
 	int		i;
 	char	*s;
 

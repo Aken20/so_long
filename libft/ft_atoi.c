@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 06:50:44 by ahibrahi          #+#    #+#             */
-/*   Updated: 2023/09/10 03:44:55 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:01:19 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_atoi(const char *str)
 	}
 	if (str[i] >= 48 && str[i] <= 57)
 		aoi = (str[i++] - 48);
-	else 
+	else
 		return (0);
 	while (str[i] >= 48 && str[i] <= 57)
 		aoi = (aoi * 10) + (str[i++] - 48);

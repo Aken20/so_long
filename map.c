@@ -6,11 +6,20 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:03:58 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/04 08:39:30 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:06:25 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	ft_is_valid(char **map, int y, int x)
+{
+	if (map[y][x] && (map[y][x] == '1' ||
+			map[y][x] == '0' || map[y][x] == 'C' ||
+			map[y][x] == 'P' || map[y][x] == 'E'))
+		return (1);
+	return (0);
+}
 
 static	int	ft_rectangular_check(char **map, int len)
 {
@@ -23,20 +32,13 @@ static	int	ft_rectangular_check(char **map, int len)
 	while (map[y])
 	{
 		tmp = len;
-		while (map[y][x] && map[y][x] != '1')
-			x++;
 		if (map[y][x] && map[y][x] == '1')
 		{
-			while (map[y][x] && (map[y][x] == '1' ||
-			map[y][x] == '0' || map[y][x] == 'C' ||
-			map[y][x] == 'P' || map[y][x] == 'E'))
-			{
-				x++;
+			while (ft_is_valid(map, y, x++))
 				tmp--;
-			}
-			if (tmp > 0 || tmp < 0)
-				exit(ft_putstr("its not rectangular"));
 		}
+		if (tmp != 0 && map[y][x] != '\n')
+			exit(ft_putstr("its not rectangular"));
 		x = 0;
 		y++;
 	}
@@ -122,27 +124,27 @@ static	int	ft_player(char **map)
 	return (0);
 }
 
-int	ft_check_map(char **map)
+int	ft_check_map(t_data *img)
 {
 	int	line_length;
 	int	len;
 
 	len = 0;
-	if (!map)
+	if (!img->map_s->map)
 		exit(ft_putstr("THER'S NO MAP"));
-	line_length = ft_firstline(map);
-	while (map[len])
+	line_length = ft_firstline(img->map_s->map);
+	while (img->map_s->map[len])
 		len++;
-	ft_lastline(map[len - 1], line_length);
-	if (ft_exits(map))
+	ft_lastline(img->map_s->map[len - 1], line_length);
+	if (ft_exits(img->map_s->map))
 		exit (0);
-	else if (ft_collectable(map))
+	else if (ft_collectable(img->map_s->map))
 		exit (0);
-	else if (ft_player(map))
+	if (ft_player(img->map_s->map))
 		exit (0);
-	else if (ft_rectangular_check(map, line_length))
+	if (ft_rectangular_check(img->map_s->map, line_length))
 		exit (0);
-	// else if (ft_check_sides(map))
-		// exit (0);
+	if (ft_check_sides(img->map_s->map, line_length))
+		return (0);
 	return (0);
 }

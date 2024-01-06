@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 21:00:19 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/03 08:10:34 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:58:36 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ size_t	ft_strlen(const char *s)
 		len++;
 	return (len);
 }
-
 
 char	*ft_g_strdup(char *s, int k)
 {

@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 22:16:58 by ahibrahi          #+#    #+#             */
-/*   Updated: 2023/09/10 03:43:30 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:02:07 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	char	*ft_m(unsigned int start, size_t len, size_t n)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*sub; 
+	char	*sub;
 	size_t	i;
 	size_t	n;
 

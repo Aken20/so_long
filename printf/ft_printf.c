@@ -53,9 +53,9 @@ int	ft_printf(const char *type, ...)
 			if (type[i] == '%')
 			{
 				i++;
-					c += ft_pset(type[i], args);
+				c += ft_pset(type[i], args);
 			}
-			else 
+			else
 				c += write (1, &type[i], 1);
 			i++;
 		}

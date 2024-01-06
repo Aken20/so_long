@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 23:31:49 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/04 00:45:01 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:06:58 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_up(t_data *img)
 
 void	ft_right(t_data *img)
 {
+	img->map_s->p_s = 1;
 	if (img->map_s->map[img->map_s->p_y][img->map_s->p_x + 1] == '0')
 	{
 		img->map_s->map[img->map_s->p_y][img->map_s->p_x + 1] = 'P';
@@ -79,6 +80,7 @@ void	ft_right(t_data *img)
 
 void	ft_left(t_data *img)
 {
+	img->map_s->p_s = 2;
 	if (img->map_s->map[img->map_s->p_y][img->map_s->p_x - 1] == '0')
 	{
 		img->map_s->map[img->map_s->p_y][img->map_s->p_x - 1] = 'P';
