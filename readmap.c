@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 04:27:23 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/06 22:51:32 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/08 12:38:50 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ int	ft_check_sides(char **map, int len)
 					x++;
 				if (x > 1)
 					if (map[y][x - 1] != '1' && map[y][x - 1] != '\n')
-						return (ft_putstr("THE MAP ARE NOT SURROUNDED BY WALLS"));
+						exit (ft_putstr("THE MAP ARE NOT SURROUNDED BY WALLS"));
 			}
-			// else
-			// 	x++;
 		}
 		x = 0;
 		y++;
@@ -65,14 +63,11 @@ int	ft_lastline(char *map, int len)
 	x = 0;
 	if (map[x])
 	{
-		// while (map[x] && map[x] != '1')
-		// 	x++;
-		while (map[x])
+		while (map[x] && map[x] == '1')
 		{
 			len--;
 			x++;
 		}
-		ft_printf("%d\n", len);
 		if (len != 0)
 			exit(ft_putstr("the first line and the last line is not all walls"));
 	}
@@ -113,6 +108,8 @@ char	**ft_read_map(char **map, char *file)
 	i = 0;
 	fd = open(file, O_RDONLY);
 	i = ft_lines_len(fd);
+	if (i <= 0)
+		exit(ft_putstr("THER'S NO FILE"));
 	map = malloc (sizeof(char *) * (i + 1));
 	i = 0;
 	close(fd);
@@ -122,9 +119,8 @@ char	**ft_read_map(char **map, char *file)
 	{
 		if (!s)
 			break ;
-		map[i] = ft_g_strdup(s, 0);
+		map[i++] = ft_g_strdup(s, 0);
 		s = get_next_line(fd);
-		i++;
 		// free(s);
 	}
 	map[i] = NULL;

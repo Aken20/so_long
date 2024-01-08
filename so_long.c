@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 04:18:21 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/06 23:01:07 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:41:35 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,6 @@ void	ft_set_render(t_data *img, int x, int y)
 			mlx_put_image_to_window(img->mlx, img->win, img->img_s->player,
 				(x * img->size), (y * img->size));
 	}
-	else if (img->map_s->map[y][x] == 'E')
-	{
-		if (ft_collectable_count(img->map_s->map))
-			mlx_put_image_to_window(img->mlx, img->win,
-				img->img_s->closed_door, (x * img->size),
-				(y * img->size));
-		else
-			mlx_put_image_to_window(img->mlx, img->win,
-				img->img_s->exit, (x * img->size),
-				(y * img->size));
-	}
 }
 
 int	ft_render(t_data *img)
@@ -56,17 +45,31 @@ int	ft_render(t_data *img)
 		while (img->x < img->map_s->x)
 		{
 			ft_set_render(img, img->x, img->y);
+			if (img->map_s->map[img->y][img->x] == 'E')
+			{
+				if (ft_collectable_count(img->map_s->map))
+					mlx_put_image_to_window(img->mlx, img->win,
+						img->img_s->closed_door, (img->x * img->size),
+						(img->y * img->size));
+				else
+					mlx_put_image_to_window(img->mlx, img->win,
+						img->img_s->exit, (img->x * img->size),
+						(img->y * img->size));
+			}
 			img->x++;
 		}
 		img->x = 0;
 		img->y++;
 	}
 	img->y = 0;
+	mlx_string_put(img->mlx, img->win, img->size / 4, img->size / 4, 1,  "moves:");
+	mlx_string_put(img->mlx, img->win, img->size, img->size / 4, 1,  ft_itoa(img->moves));
 	return (0);
 }
 
 void	ft_set_imgs(t_data *img)
 {
+	img->moves = 0;
 	img->win = mlx_new_window(img->mlx, img->map_s->x * 60,
 			img->map_s->y * 60, "Game");
 	img->img_s->wall = mlx_xpm_file_to_image(img->mlx, "texture/wall.xpm",
@@ -87,25 +90,20 @@ void	ft_set_imgs(t_data *img)
 	img->y = 0;
 }
 
-int	ft_quit_game(t_data *img)
-{
-	mlx_destroy_window(img->mlx, img->win);
-	free(img);
-	exit(0);
-}
-
 int	ft_hocks(int keycode, t_data *img)
 {
-	if (keycode == ESC)
+	(void)img;
+
+	if (keycode == 53)
 		ft_quit_game(img);
-	else if (keycode == W)
-		ft_up(img);
-	else if (keycode == A)
-		ft_left(img);
-	else if (keycode == S)
-		ft_down(img);
-	else if (keycode == D)
-		ft_right(img);
+	else if (keycode == 13 || keycode == 126)
+		ft_up(img->map_s, img);
+	else if (keycode == 0 || keycode == 123)
+		ft_left(img->map_s, img);
+	else if (keycode == 1 || keycode == 125)
+		ft_down(img->map_s, img);
+	else if (keycode == 2 || keycode == 124)
+		ft_right(img->map_s, img);
 	return (0);
 }
 
@@ -127,12 +125,16 @@ int	main (int ac, char **av)
 		i = 0;
 		img = malloc(sizeof(t_data));
 		img->map_s = malloc(sizeof(t_map));
+		img->map_tmp = malloc(sizeof(t_map));
 		img->img_s = malloc(sizeof(t_imgs));
 		img->map_s->map = ft_read_map(img->map_s->map, av[1]);
 		img->map_s->x = (int)ft_strlen(img->map_s->map[0]);
 		while (img->map_s->map[i])
 			i++;
 		img->map_s->y = i;
+		img->map_tmp->map = ft_read_map(img->map_tmp->map, av[1]);
+		// if (!ft_valid_path(img, 0, 0))
+		// 	exit(1);
 		ft_check_map(img);
 		img->mlx = mlx_init();
 		ft_set_imgs(img);

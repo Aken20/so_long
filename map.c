@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:03:58 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/06 23:06:25 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:23:23 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static	int	ft_collectable(char **map)
 	return (0);
 }
 
-static	int	ft_exits(char **map)
+int	ft_exits(char **map)
 {
 	int	exit;
 	int	y;

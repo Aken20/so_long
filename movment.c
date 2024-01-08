@@ -6,7 +6,7 @@
 /*   By: ahibrahi <ahibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 23:31:49 by ahibrahi          #+#    #+#             */
-/*   Updated: 2024/01/06 15:06:58 by ahibrahi         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:42:52 by ahibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,88 +35,109 @@ int	ft_collectable_count(char **map)
 	return (collectable);
 }
 
-void	ft_up(t_data *img)
+void	ft_up(t_map *map_s, t_data *img)
 {
-	if (img->map_s->map[img->map_s->p_y - 1][img->map_s->p_x] == '0')
+	if (map_s->map[map_s->p_y][map_s->p_x] != 'P')
+		return ;
+	if (map_s->map[map_s->p_y - 1][map_s->p_x] == '0')
 	{
-		img->map_s->map[img->map_s->p_y - 1][img->map_s->p_x] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y - 1][map_s->p_x] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 	}
-	else if (img->map_s->map[img->map_s->p_y - 1][img->map_s->p_x] == 'C')
+	else if (map_s->map[map_s->p_y - 1][map_s->p_x] == 'C')
 	{
-		img->map_s->map[img->map_s->p_y - 1][img->map_s->p_x] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y - 1][map_s->p_x] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 	}
-	else if (img->map_s->map[img->map_s->p_y - 1][img->map_s->p_x] == 'E'
-			&& !ft_collectable_count(img->map_s->map))
+	else if (map_s->map[map_s->p_y - 1][map_s->p_x] == 'E'
+			&& !ft_collectable_count(map_s->map))
 	{
-		img->map_s->map[img->map_s->p_y - 1][img->map_s->p_x] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y - 1][map_s->p_x] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 		ft_quit_game(img);
 	}
 }
 
-void	ft_right(t_data *img)
+void	ft_right(t_map *map_s, t_data *img)
 {
-	img->map_s->p_s = 1;
-	if (img->map_s->map[img->map_s->p_y][img->map_s->p_x + 1] == '0')
+	if (map_s->map[map_s->p_y][map_s->p_x] != 'P')
+		return ;
+	map_s->p_s = 1;
+	if (map_s->map[map_s->p_y][map_s->p_x + 1] == '0')
 	{
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x + 1] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y][map_s->p_x + 1] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 	}
-	else if (img->map_s->map[img->map_s->p_y][img->map_s->p_x + 1] == 'C')
+	else if (map_s->map[map_s->p_y][map_s->p_x + 1] == 'C')
 	{
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x + 1] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y][map_s->p_x + 1] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 	}
-	else if (img->map_s->map[img->map_s->p_y][img->map_s->p_x + 1] == 'E'
-			&& !ft_collectable_count(img->map_s->map))
+	else if (map_s->map[map_s->p_y][map_s->p_x + 1] == 'E'
+			&& !ft_collectable_count(map_s->map))
 	{
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x + 1] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y][map_s->p_x + 1] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 		ft_quit_game(img);
 	}
 }
 
-void	ft_left(t_data *img)
+void	ft_left(t_map *map_s, t_data *img)
 {
-	img->map_s->p_s = 2;
-	if (img->map_s->map[img->map_s->p_y][img->map_s->p_x - 1] == '0')
+	if (map_s->map[map_s->p_y][map_s->p_x] != 'P')
+		return ;
+	map_s->p_s = 2;
+	if (map_s->map[map_s->p_y][map_s->p_x - 1] == '0')
 	{
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x - 1] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y][map_s->p_x - 1] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 	}
-	else if (img->map_s->map[img->map_s->p_y][img->map_s->p_x - 1] == 'C')
+	else if (map_s->map[map_s->p_y][map_s->p_x - 1] == 'C')
 	{
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x - 1] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y][map_s->p_x - 1] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 	}
-	else if (img->map_s->map[img->map_s->p_y][img->map_s->p_x - 1] == 'E'
-			&& !ft_collectable_count(img->map_s->map))
+	else if (map_s->map[map_s->p_y][map_s->p_x - 1] == 'E'
+			&& !ft_collectable_count(map_s->map))
 	{
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x - 1] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y][map_s->p_x - 1] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 		ft_quit_game(img);
 	}
 }
 
-void	ft_down(t_data *img)
+void	ft_down(t_map *map_s, t_data *img)
 {
-	if (img->map_s->map[img->map_s->p_y + 1][img->map_s->p_x] == '0')
+	if (map_s->map[map_s->p_y][map_s->p_x] != 'P')
+		return ;
+	map_s->p_s = 0;
+	if (map_s->map[map_s->p_y + 1][map_s->p_x] == '0')
 	{
-		img->map_s->map[img->map_s->p_y + 1][img->map_s->p_x] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y + 1][map_s->p_x] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 	}
-	else if (img->map_s->map[img->map_s->p_y + 1][img->map_s->p_x] == 'C')
+	else if (map_s->map[map_s->p_y + 1][map_s->p_x] == 'C')
 	{
-		img->map_s->map[img->map_s->p_y + 1][img->map_s->p_x] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y + 1][map_s->p_x] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 	}
-	else if (img->map_s->map[img->map_s->p_y + 1][img->map_s->p_x] == 'E'
-			&& !ft_collectable_count(img->map_s->map))
+	else if (map_s->map[map_s->p_y + 1][map_s->p_x] == 'E'
+			&& !ft_collectable_count(map_s->map))
 	{
-		img->map_s->map[img->map_s->p_y + 1][img->map_s->p_x] = 'P';
-		img->map_s->map[img->map_s->p_y][img->map_s->p_x] = '0';
+		map_s->map[map_s->p_y + 1][map_s->p_x] = 'P';
+		map_s->map[map_s->p_y][map_s->p_x] = '0';
+		img->moves++;
 		ft_quit_game(img);
 	}
 }
